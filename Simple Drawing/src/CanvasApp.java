@@ -31,6 +31,13 @@ public class CanvasApp {
 	private CircleRenderer rendererc;
 	private DdaRenderer rendererDda;
 	private List<Point> points = new ArrayList<>();
+	
+	private JButton btnLine;
+	private JButton btnDDALine;
+	private JButton btnCircle;
+	private JButton btnPolygon;
+	
+	private Color btnColor = new Color(238, 238, 238);
 
 	public class MyMouseAdapter extends MouseAdapter {
 		// metoda, ktera definuje co se stane, kdyz uzivatel zmacke tlacitko
@@ -107,7 +114,7 @@ public class CanvasApp {
 
 	public CanvasApp(int width, int height) {
 		frame = new JFrame();
-		frame.setTitle("PGRF úloha 01");
+		frame.setTitle("Simple Drawing");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -116,36 +123,48 @@ public class CanvasApp {
 		tlb = new JToolBar();
 		frame.add(tlb, BorderLayout.NORTH);
 
-		JButton btnLine = new JButton("Pøímka - triviální alg.");
+		btnLine = new JButton("PÅ™Ã­mka - triviÃ¡lnÃ­");
 		tlb.add(btnLine);
 		btnLine.addActionListener(e -> {
-			btnIndex = 1;			
+			btnIndex = 1;
+			btnChangeColor(btnIndex);
 		});
+		btnLine.setFocusable(false);
 
-		JButton btnDDALine = new JButton("Pøímka - DDA alg.");
+		btnDDALine = new JButton("PÅ™Ã­mka - DDA alg.");
 		tlb.add(btnDDALine);
 		btnDDALine.addActionListener(e -> {
 			btnIndex = 2;
+			btnChangeColor(btnIndex);	
 		});
-		JButton btnCircle = new JButton("Kružnice");
+		btnDDALine.setFocusable(false);
+		
+		btnCircle = new JButton("KruÅ¾nice");
 		tlb.add(btnCircle);
 		btnCircle.addActionListener(e -> {
 			btnIndex = 3;
+			btnChangeColor(btnIndex);
 		});
+		btnCircle.setFocusable(false);
 
-		JButton btnPolygon = new JButton("Polygon");
+		btnPolygon = new JButton("Polygon");
 		tlb.add(btnPolygon);
 		btnPolygon.addActionListener(e -> {
 			btnIndex = 4;
+			btnChangeColor(btnIndex);
 		});
+		btnPolygon.setFocusable(false);
 
-		JButton btnClear = new JButton("Vyèistit Plátno");
+		JButton btnClear = new JButton("VyÄistit plÃ¡tno");
 		tlb.add(btnClear);
 		btnClear.addActionListener(e -> {
 			start();
 			points.removeAll(points);
 			pom = 0;
+			btnIndex = 5;
+			btnChangeColor(btnIndex);
 		});
+		btnClear.setFocusable(false);
 
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));
@@ -161,6 +180,47 @@ public class CanvasApp {
 		mA = new MyMouseAdapter();
 		panel.addMouseListener(mA);
 
+	}
+	
+	private void btnChangeColor(int index) {
+		switch (index) {
+		case 1:
+			btnLine.setBackground(Color.GREEN);
+			btnDDALine.setBackground(btnColor);
+			btnCircle.setBackground(btnColor);
+			btnPolygon.setBackground(btnColor);
+			break;
+		case 2:
+			btnLine.setBackground(btnColor);
+			btnDDALine.setBackground(Color.GREEN);
+			btnCircle.setBackground(btnColor);
+			btnPolygon.setBackground(btnColor);
+			break;
+		case 3:
+			btnLine.setBackground(btnColor);
+			btnDDALine.setBackground(btnColor);
+			btnCircle.setBackground(Color.GREEN);
+			btnPolygon.setBackground(btnColor);
+			break;
+		case 4:
+			btnLine.setBackground(btnColor);
+			btnDDALine.setBackground(btnColor);
+			btnCircle.setBackground(btnColor);
+			btnPolygon.setBackground(Color.GREEN);
+			break;
+		case 5:
+			btnLine.setBackground(btnColor);
+			btnDDALine.setBackground(btnColor);
+			btnCircle.setBackground(btnColor);
+			btnPolygon.setBackground(btnColor);
+			break;
+		default:
+			btnLine.setBackground(btnColor);
+			btnDDALine.setBackground(btnColor);
+			btnCircle.setBackground(btnColor);
+			btnPolygon.setBackground(btnColor);
+			break;
+		}
 	}
 
 	public void clear(int color) {
